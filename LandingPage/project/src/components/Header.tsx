@@ -6,6 +6,7 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
+  const dropdownTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,6 +23,20 @@ const Header = () => {
     }
     setIsMenuOpen(false)
     setActiveDropdown(null)
+  }
+
+  const handleDropdownEnter = (dropdownName: string) => {
+    if (dropdownTimeoutRef.current) {
+      clearTimeout(dropdownTimeoutRef.current)
+      dropdownTimeoutRef.current = null
+    }
+    setActiveDropdown(dropdownName)
+  }
+
+  const handleDropdownLeave = () => {
+    dropdownTimeoutRef.current = setTimeout(() => {
+      setActiveDropdown(null)
+    }, 150) // 150ms delay
   }
   const dropdownRefs = useRef<Record<string, HTMLDivElement | null>>({});
   useEffect(() => {
@@ -395,11 +410,13 @@ const Header = () => {
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center space-x-6">
               {/* PDF Tools Dropdown */}
-              <div className="relative group">
+              <div 
+                className="relative group"
+                onMouseEnter={() => handleDropdownEnter('pdf-tools')}
+                onMouseLeave={handleDropdownLeave}
+              >
                 <button
                   className="flex items-center text-gray-700 hover:text-primary-600 transition-colors"
-                  onMouseEnter={() => setActiveDropdown('pdf-tools')}
-                  onMouseLeave={() => setActiveDropdown(null)}
                 >
                   PDF Tools <ChevronDown className="ml-1 h-4 w-4" />
                 </button>
@@ -408,9 +425,6 @@ const Header = () => {
                   <div
                     ref={(el) => (dropdownRefs.current['pdf-tools'] = el)}
                     className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[1050px] max-h-[80vh] overflow-y-auto bg-white rounded-lg shadow-2xl border border-gray-200 p-6 z-50 scrollbar-thin scrollbar-thumb-gray-300 hover:scrollbar-thumb-gray-400"
-
-                    onMouseEnter={() => setActiveDropdown('pdf-tools')}
-                    onMouseLeave={() => setActiveDropdown(null)}
                   >
                     <div className="grid grid-cols-6 gap-6">
                       {/* Recent Column */}
@@ -516,11 +530,13 @@ const Header = () => {
               </div>
 
               {/* Why DocuSigner Dropdown */}
-              <div className="relative group">
+              <div 
+                className="relative group"
+                onMouseEnter={() => handleDropdownEnter('why-docusigner')}
+                onMouseLeave={handleDropdownLeave}
+              >
                 <button
                   className="flex items-center text-gray-700 hover:text-primary-600 transition-colors"
-                  onMouseEnter={() => setActiveDropdown('why-docusigner')}
-                  onMouseLeave={() => setActiveDropdown(null)}
                 >
                   Why DraftnSign <ChevronDown className="ml-1 h-4 w-4" />
                 </button>
@@ -529,8 +545,6 @@ const Header = () => {
                   <div
                     ref={(el) => (dropdownRefs.current['why-docusigner'] = el)}
                     className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[600px] bg-white rounded-lg shadow-2xl border border-gray-200 p-6 z-50"
-                    onMouseEnter={() => setActiveDropdown('why-docusigner')}
-                    onMouseLeave={() => setActiveDropdown(null)}
                   >
                     <div className="grid grid-cols-2 gap-6">
                       {whyDocuSignerMenu.map((section, sectionIndex) => (
@@ -558,11 +572,13 @@ const Header = () => {
               </div>
 
               {/* Use Cases Dropdown */}
-              <div className="relative group">
+              <div 
+                className="relative group"
+                onMouseEnter={() => handleDropdownEnter('use-cases')}
+                onMouseLeave={handleDropdownLeave}
+              >
                 <button
                   className="flex items-center text-gray-700 hover:text-primary-600 transition-colors"
-                  onMouseEnter={() => setActiveDropdown('use-cases')}
-                  onMouseLeave={() => setActiveDropdown(null)}
                 >
                   Use Cases <ChevronDown className="ml-1 h-4 w-4" />
                 </button>
@@ -571,9 +587,6 @@ const Header = () => {
                   <div
                     ref={(el) => (dropdownRefs.current['use-cases'] = el)}
                      className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[1050px] max-h-[80vh] overflow-y-auto bg-white rounded-lg shadow-2xl border border-gray-200 p-6 z-50 scrollbar-thin scrollbar-thumb-gray-300 hover:scrollbar-thumb-gray-400"
-
-                    onMouseEnter={() => setActiveDropdown('use-cases')}
-                    onMouseLeave={() => setActiveDropdown(null)}
                   >
                     <div className="grid grid-cols-3 gap-6">
                       {useCasesMenu.industries.map((section, sectionIndex) => (
@@ -619,11 +632,13 @@ const Header = () => {
               </div>
 
               {/* Resources Dropdown */}
-              <div className="relative group">
+              <div 
+                className="relative group"
+                onMouseEnter={() => handleDropdownEnter('resources')}
+                onMouseLeave={handleDropdownLeave}
+              >
                 <button
                   className="flex items-center text-gray-700 hover:text-primary-600 transition-colors"
-                  onMouseEnter={() => setActiveDropdown('resources')}
-                  onMouseLeave={() => setActiveDropdown(null)}
                 >
                   Resources <ChevronDown className="ml-1 h-4 w-4" />
                 </button>
@@ -632,8 +647,6 @@ const Header = () => {
                   <div
                     ref={(el) => (dropdownRefs.current['resources'] = el)}
                     className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[700px] bg-white rounded-lg shadow-2xl border border-gray-200 p-6 z-50"
-                    onMouseEnter={() => setActiveDropdown('resources')}
-                    onMouseLeave={() => setActiveDropdown(null)}
                   >
                     <div className="grid grid-cols-3 gap-6">
                       {Object.entries(resourcesMenu).map(([key, section]) => (
@@ -663,11 +676,13 @@ const Header = () => {
               </div>
 
               {/* Developer Dropdown */}
-              <div className="relative group">
+              <div 
+                className="relative group"
+                onMouseEnter={() => handleDropdownEnter('developer')}
+                onMouseLeave={handleDropdownLeave}
+              >
                 <button
                   className="flex items-center text-gray-700 hover:text-primary-600 transition-colors"
-                  onMouseEnter={() => setActiveDropdown('developer')}
-                  onMouseLeave={() => setActiveDropdown(null)}
                 >
                   Developer <ChevronDown className="ml-1 h-4 w-4" />
                 </button>
@@ -676,8 +691,6 @@ const Header = () => {
                   <div
                     ref={(el) => (dropdownRefs.current['developer'] = el)}
                     className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[600px] bg-white rounded-lg shadow-2xl border border-gray-200 p-6 z-50"
-                    onMouseEnter={() => setActiveDropdown('developer')}
-                    onMouseLeave={() => setActiveDropdown(null)}
                   >
                     <div className="grid grid-cols-2 gap-6">
                       {developerMenu.map((section, sectionIndex) => (
@@ -705,11 +718,13 @@ const Header = () => {
               </div>
 
               {/* Workspace Dropdown */}
-              <div className="relative group">
+              <div 
+                className="relative group"
+                onMouseEnter={() => handleDropdownEnter('workspace')}
+                onMouseLeave={handleDropdownLeave}
+              >
                 <button
                   className="flex items-center text-gray-700 hover:text-primary-600 transition-colors"
-                  onMouseEnter={() => setActiveDropdown('workspace')}
-                  onMouseLeave={() => setActiveDropdown(null)}
                 >
                   Workspace <ChevronDown className="ml-1 h-4 w-4" />
                 </button>
@@ -718,8 +733,6 @@ const Header = () => {
                   <div
                     ref={(el) => (dropdownRefs.current['workspace'] = el)}
                     className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[600px] bg-white rounded-lg shadow-2xl border border-gray-200 p-6 z-50"
-                    onMouseEnter={() => setActiveDropdown('workspace')}
-                    onMouseLeave={() => setActiveDropdown(null)}
                   >
                     <div className="grid grid-cols-2 gap-6">
                       {workspaceMenu.map((section, sectionIndex) => (
@@ -747,11 +760,13 @@ const Header = () => {
               </div>
 
               {/* Industries Dropdown */}
-              <div className="relative group">
+              <div 
+                className="relative group"
+                onMouseEnter={() => handleDropdownEnter('industries')}
+                onMouseLeave={handleDropdownLeave}
+              >
                 <button
                   className="flex items-center text-gray-700 hover:text-primary-600 transition-colors"
-                  onMouseEnter={() => setActiveDropdown('industries')}
-                  onMouseLeave={() => setActiveDropdown(null)}
                 >
                   Industries <ChevronDown className="ml-1 h-4 w-4" />
                 </button>
@@ -760,8 +775,6 @@ const Header = () => {
                   <div
                     ref={(el) => (dropdownRefs.current['industries'] = el)}
                     className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[800px] bg-white rounded-lg shadow-2xl border border-gray-200 p-6 z-50"
-                    onMouseEnter={() => setActiveDropdown('industries')}
-                    onMouseLeave={() => setActiveDropdown(null)}
                   >
                     <div className="grid grid-cols-3 gap-6">
                       {industriesMenu.map((section, sectionIndex) => (
@@ -789,11 +802,13 @@ const Header = () => {
               </div>
 
               {/* Features Dropdown */}
-              <div className="relative group">
+              <div 
+                className="relative group"
+                onMouseEnter={() => handleDropdownEnter('features')}
+                onMouseLeave={handleDropdownLeave}
+              >
                 <button
                   className="flex items-center text-gray-700 hover:text-primary-600 transition-colors"
-                  onMouseEnter={() => setActiveDropdown('features')}
-                  onMouseLeave={() => setActiveDropdown(null)}
                 >
                   Features <ChevronDown className="ml-1 h-4 w-4" />
                 </button>
@@ -802,8 +817,6 @@ const Header = () => {
                   <div
                     ref={(el) => (dropdownRefs.current['features'] = el)}
                     className="absolute top-full mt-2 w-[600px] bg-white rounded-lg shadow-2xl border border-gray-200 p-6 z-50"
-                    onMouseEnter={() => setActiveDropdown('features')}
-                    onMouseLeave={() => setActiveDropdown(null)}
                   >
                     <div className="grid grid-cols-2 gap-6">
                       {featuresMenu.map((section, sectionIndex) => (

@@ -1,5 +1,6 @@
 import React from 'react'
 import { FileText, Edit, Users, Send, Shield, Zap, CheckCircle, ArrowRight, Upload, Download, Eye, Lock, Building } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 const ComprehensivePlatform = () => {
   const platformFeatures = [
@@ -247,10 +248,13 @@ const ComprehensivePlatform = () => {
                     </div>
                   </div>
                 </div>
+                <Link to="/login">
+                  <button className="w-full bg-indigo-600 text-white py-2 rounded-lg text-sm font-medium hover:bg-indigo-700 transition-colors">
+                    + Invite Team Member
+                  </button>
 
-                <button className="w-full bg-indigo-600 text-white py-2 rounded-lg text-sm font-medium hover:bg-indigo-700 transition-colors">
-                  + Invite Team Member
-                </button>
+                </Link>
+
               </div>
             </div>
           </div>
@@ -284,10 +288,13 @@ const ComprehensivePlatform = () => {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               {/* Primary Filled (White with Icon) */}
-              <button className="flex items-center justify-center gap-2 bg-white text-blue-600 hover:bg-gray-100 font-semibold text-base px-6 py-3 rounded-md shadow-md transition-all duration-200">
+              <Link to="/signup">
+               <button className="flex items-center justify-center gap-2 bg-white text-blue-600 hover:bg-gray-100 font-semibold text-base px-6 py-3 rounded-md shadow-md transition-all duration-200">
                 Start Free Forever
                 <ArrowRight className="h-4 w-4 align-middle" />
               </button>
+              </Link>
+             
 
               {/* Secondary Outlined (White border with hover flip) */}
               <button className="flex items-center justify-center gap-2 border-2 border-white text-white hover:bg-white hover:text-blue-600 font-semibold text-base px-6 py-3 rounded-md transition-all duration-200">

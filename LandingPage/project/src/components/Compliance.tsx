@@ -5,7 +5,7 @@ const Compliance = () => {
   const [searchTerm, setSearchTerm] = useState('')
   const [expandedCountry, setExpandedCountry] = useState(null)
   const [activeTab, setActiveTab] = useState('all')
-  const [userCountry, setUserCountry] = useState('United States') // This would be detected via IP
+  const [userCountry, setUserCountry] = useState('') // This would be detected via IP
   const [activeStep, setActiveStep] = useState(0)
 
   // Simulate IP-based country detection
@@ -15,14 +15,14 @@ const Compliance = () => {
     const detectUserCountry = async () => {
       try {
         // Simulated IP detection - in reality you'd use a service like ipapi.co
-        // const response = await fetch('https://ipapi.co/json/')
-        // const data = await response.json()
-        // setUserCountry(data.country_name)
+        const response = await fetch('https://ipapi.co/json/')
+        const data = await response.json()
+        setUserCountry(data.country_name)
         
         // For demo, we'll randomly assign a country
-        const demoCountries = ['United States', 'United Kingdom', 'Canada', 'Australia', 'India']
-        const randomCountry = demoCountries[Math.floor(Math.random() * demoCountries.length)]
-        setUserCountry(randomCountry)
+        // const demoCountries = ['United States', 'United Kingdom', 'Canada', 'Australia', 'India']
+        // const randomCountry = demoCountries[Math.floor(Math.random() * demoCountries.length)]
+        // setUserCountry(randomCountry)
       } catch (error) {
         console.log('Could not detect user country')
       }

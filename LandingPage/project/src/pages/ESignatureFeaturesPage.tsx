@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { 
-  FileCheck, Users, MousePointer, Shield, Repeat, Award, 
+import {
+  FileCheck, Users, MousePointer, Shield, Repeat, Award,
   CheckCircle, ArrowRight, Clock, Globe, Lock, FileText,
-  Smartphone, Zap, BarChart3, Bell, Settings, Eye
+  Smartphone, Zap, BarChart3, Bell, Settings, Eye,
+  Star,
+  Code
 } from 'lucide-react';
 
 const ESignatureFeaturesPage = () => {
@@ -183,7 +185,7 @@ const ESignatureFeaturesPage = () => {
               Professional <span className="gradient-text">eSignature</span> Platform
             </h1>
             <p className="text-xl text-gray-600 mb-8">
-              Secure, legally binding electronic signatures with advanced workflow capabilities. 
+              Secure, legally binding electronic signatures with advanced workflow capabilities.
               Streamline your document signing process with enterprise-grade security and compliance.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
@@ -249,7 +251,7 @@ const ESignatureFeaturesPage = () => {
               <div key={index} className="bg-white rounded-xl p-6 shadow-md border border-gray-100">
                 <h3 className="text-xl font-semibold text-gray-900 mb-3">{type.name}</h3>
                 <p className="text-gray-600 mb-4">{type.description}</p>
-                
+
                 <div className="mb-4">
                   <h4 className="font-medium text-gray-900 mb-2">Common Use Cases:</h4>
                   <div className="flex flex-wrap gap-2">
@@ -260,15 +262,14 @@ const ESignatureFeaturesPage = () => {
                     ))}
                   </div>
                 </div>
-                
+
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <h4 className="font-medium text-gray-900 mb-1">Security Level:</h4>
-                    <div className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${
-                      type.securityLevel === 'Standard' ? 'bg-blue-100 text-blue-800' :
-                      type.securityLevel === 'High' ? 'bg-purple-100 text-purple-800' :
-                      'bg-green-100 text-green-800'
-                    }`}>
+                    <div className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${type.securityLevel === 'Standard' ? 'bg-blue-100 text-blue-800' :
+                        type.securityLevel === 'High' ? 'bg-purple-100 text-purple-800' :
+                          'bg-green-100 text-green-800'
+                      }`}>
                       {type.securityLevel}
                     </div>
                   </div>
@@ -301,7 +302,7 @@ const ESignatureFeaturesPage = () => {
             <div className="relative">
               {/* Connecting Line */}
               <div className="absolute top-24 left-0 right-0 h-0.5 bg-gray-200 hidden md:block"></div>
-              
+
               <div className="grid md:grid-cols-6 gap-8">
                 {workflowSteps.map((step, index) => {
                   const StepIcon = step.icon;
@@ -597,7 +598,7 @@ const ESignatureFeaturesPage = () => {
                   <FileText className="h-5 w-5 text-primary-600" />
                   <span className="font-medium text-gray-900">Employment Contract.pdf</span>
                 </div>
-                
+
                 {/* Signature Fields */}
                 <div className="space-y-4">
                   <div className="border-2 border-dashed border-primary-300 rounded-lg p-4 bg-primary-50">
@@ -607,7 +608,7 @@ const ESignatureFeaturesPage = () => {
                     </div>
                     <div className="mt-2 text-xs text-primary-600">Click to sign</div>
                   </div>
-                  
+
                   <div className="border-2 border-dashed border-orange-300 rounded-lg p-4 bg-orange-50">
                     <div className="flex items-center justify-between mb-2">
                       <span className="text-sm font-medium text-orange-700">Date Field</span>

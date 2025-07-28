@@ -1,5 +1,6 @@
 import React from 'react'
 import { ArrowRight, CheckCircle } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 const CTASection = () => {
   return (
@@ -14,10 +15,13 @@ const CTASection = () => {
             e-signature, and legal template needs.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+            <Link to="/signup">
             <button className="flex items-center justify-center gap-2 bg-white text-blue-600 hover:bg-gray-100 font-semibold text-base px-6 py-3 rounded-md shadow-md hover:shadow-lg transition duration-200">
               Start Free Forever
               <ArrowRight className="h-4 w-4 align-middle" />
             </button>
+            </Link>
+            
             <button className="flex items-center justify-center gap-2 border-2 border-white text-white hover:bg-white hover:text-blue-600 font-semibold text-base px-6 py-3 rounded-md transition duration-200">
               Schedule Demo
             </button>

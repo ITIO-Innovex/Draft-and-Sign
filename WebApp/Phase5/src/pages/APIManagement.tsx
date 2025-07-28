@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { 
-  Code, 
-  Key, 
-  Copy, 
-  Eye, 
-  EyeOff, 
-  Plus, 
-  Trash2, 
+import {
+  Code,
+  Key,
+  Copy,
+  Eye,
+  EyeOff,
+  Plus,
+  Trash2,
   Activity,
   BookOpen,
   Download,
@@ -21,7 +21,7 @@ export const APIManagement: React.FC = () => {
     {
       id: '1',
       name: 'Production API Key',
-      key: 'sk_live_4aBcDeFgHiJkLmNoPqRsTuVwXyZ',
+      key: import.meta.env.VITE_PROD_API_KEY || '',
       created: '2024-01-15',
       lastUsed: '2 hours ago',
       usage: '1,234 calls',
@@ -30,7 +30,7 @@ export const APIManagement: React.FC = () => {
     {
       id: '2',
       name: 'Development API Key',
-      key: 'sk_test_1ZyXwVuTsRqPoNmLkJiHgFeD',
+      key: import.meta.env.VITE_DEV_API_KEY || '',
       created: '2024-01-10',
       lastUsed: '1 day ago',
       usage: '456 calls',
@@ -187,11 +187,10 @@ $document = json_decode($response, true);
                   </div>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <span className={`px-2 py-1 text-xs rounded-full ${
-                    apiKey.status === 'active' 
-                      ? 'bg-green-100 text-green-700' 
+                  <span className={`px-2 py-1 text-xs rounded-full ${apiKey.status === 'active'
+                      ? 'bg-green-100 text-green-700'
                       : 'bg-gray-100 text-gray-700'
-                  }`}>
+                    }`}>
                     {apiKey.status}
                   </span>
                   <button className="p-1 text-gray-400 hover:text-red-600">
@@ -199,7 +198,7 @@ $document = json_decode($response, true);
                   </button>
                 </div>
               </div>
-              
+
               <div className="flex items-center space-x-2">
                 <div className="flex-1 font-mono text-sm bg-gray-50 p-3 rounded border">
                   {showApiKey ? apiKey.key : apiKey.key.replace(/./g, '•')}
@@ -239,11 +238,10 @@ $document = json_decode($response, true);
               <div key={index} className="border border-gray-200 rounded-lg p-4">
                 <div className="flex items-start justify-between mb-2">
                   <div className="flex items-center space-x-3">
-                    <span className={`px-2 py-1 text-xs font-medium rounded ${
-                      endpoint.method === 'GET' ? 'bg-green-100 text-green-700' :
-                      endpoint.method === 'POST' ? 'bg-blue-100 text-blue-700' :
-                      'bg-orange-100 text-orange-700'
-                    }`}>
+                    <span className={`px-2 py-1 text-xs font-medium rounded ${endpoint.method === 'GET' ? 'bg-green-100 text-green-700' :
+                        endpoint.method === 'POST' ? 'bg-blue-100 text-blue-700' :
+                          'bg-orange-100 text-orange-700'
+                      }`}>
                       {endpoint.method}
                     </span>
                     <code className="text-sm font-mono text-gray-800">{endpoint.path}</code>
@@ -259,7 +257,7 @@ $document = json_decode($response, true);
         {/* Usage Statistics */}
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
           <h2 className="text-lg font-semibold text-gray-900 mb-6">API Usage</h2>
-          
+
           <div className="space-y-6">
             <div>
               <div className="flex items-center justify-between mb-2">
