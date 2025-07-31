@@ -1,0 +1,9 @@
+{
+  "name": "microservices-project",
+  "private": true,
+  "workspaces": [
+    "services/*/backend",
+    "services/*/frontend",
+    "packages/*"
+  ]
+}
