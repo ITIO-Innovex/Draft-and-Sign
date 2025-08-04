@@ -4,6 +4,25 @@
   "workspaces": [
     "services/*/backend",
     "services/*/frontend",
+    "services/landingPage",
     "packages/*"
-  ]
+  ],
+  "scripts": {
+    "install:all": "npm install",
+    "dev:all": "docker-compose up -d",
+    "dev:backend": "docker-compose up -d auth-service pdf-service",
+    "dev:frontend": "docker-compose up -d auth-frontend pdf-frontend main-frontend landing-page",
+    "build:all": "docker-compose build",
+    "build:backend": "docker-compose build auth-service pdf-service",
+    "build:frontend": "docker-compose build auth-frontend pdf-frontend main-frontend landing-page",
+    "stop:all": "docker-compose down",
+    "stop:backend": "docker-compose stop auth-service pdf-service",
+    "stop:frontend": "docker-compose stop auth-frontend pdf-frontend main-frontend landing-page",
+    "logs": "docker-compose logs -f",
+    "logs:backend": "docker-compose logs -f auth-service pdf-service",
+    "logs:frontend": "docker-compose logs -f auth-frontend pdf-frontend main-frontend landing-page"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
 }

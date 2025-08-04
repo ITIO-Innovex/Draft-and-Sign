@@ -1,4 +1,5 @@
 services:
+  # Backend Services
   auth-service:
     build:
       context: .
@@ -26,3 +27,106 @@ services:
       - .:/app:cached
       - /app/node_modules
     command: npm run dev
+
+  # Frontend Services
+  auth-frontend:
+    build:
+      context: .
+      dockerfile: services/auth-service/frontend/Dockerfile
+    ports:
+      - "3001:3000"
+    env_file:
+      - ./services/auth-service/frontend/.env
+    working_dir: /app/services/auth-service/frontend
+    volumes:
+      - .:/app:cached
+      - /app/node_modules
+    command: npm run dev
+    environment:
+      - REACT_APP_AUTH_API_URL=http://localhost:4000
+      - REACT_APP_PDF_API_URL=http://localhost:4001
+
+  doc-frontend:
+    build:
+      context: .
+      dockerfile: services/doc-service/frontend/Dockerfile
+    ports:
+      - "3002:3000"
+    env_file:
+      - ./services/doc-service/frontend/.env
+    working_dir: /app/services/doc-service/frontend
+    volumes:
+      - .:/app:cached
+      - /app/node_modules
+    command: npm run dev
+    environment:
+      - REACT_APP_AUTH_API_URL=http://localhost:4000
+      - REACT_APP_PDF_API_URL=http://localhost:4001
+  eisgn-frontend:
+    build:
+      context: .
+      dockerfile: services/esign-service/frontend/Dockerfile
+    ports:
+      - "3003:3000"
+    env_file:
+      - ./services/esign-service/frontend/.env
+    working_dir: /app/services/esign-service/frontend
+    volumes:
+      - .:/app:cached
+      - /app/node_modules
+    command: npm run dev
+    environment:
+      - REACT_APP_AUTH_API_URL=http://localhost:4000
+      - REACT_APP_PDF_API_URL=http://localhost:4001
+
+  pdf-frontend:
+    build:
+      context: .
+      dockerfile: services/pdf-service/frontend/Dockerfile
+    ports:
+      - "3004:3000"
+    env_file:
+      - ./services/pdf-service/frontend/.env
+    working_dir: /app/services/pdf-service/frontend
+    volumes:
+      - .:/app:cached
+      - /app/node_modules
+    command: npm run dev
+    environment:
+      - REACT_APP_AUTH_API_URL=http://localhost:4000
+      - REACT_APP_PDF_API_URL=http://localhost:4001
+  template-frontend:
+    build:
+      context: .
+      dockerfile: services/template-service/frontend/Dockerfile
+    ports:
+      - "3005:3000"
+    env_file:
+      - ./services/template-service/frontend/.env
+    working_dir: /app/services/template-service/frontend
+    volumes:
+      - .:/app:cached
+      - /app/node_modules
+    command: npm run dev
+    environment:
+      - REACT_APP_AUTH_API_URL=http://localhost:4000
+      - REACT_APP_PDF_API_URL=http://localhost:4001
+
+  landing-page:
+    build:
+      context: .
+      dockerfile: services/landingPage/Dockerfile
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./services/landingPage/.env
+    working_dir: /app/services/landingPage
+    volumes:
+      - .:/app:cached
+      - /app/node_modules
+    command: npm run dev
+    environment:
+      - REACT_APP_AUTH_API_URL=http://localhost:4000
+      - REACT_APP_PDF_API_URL=http://localhost:4001
+      - REACT_APP_AUTH_FRONTEND_URL=http://localhost:3000
+      - REACT_APP_PDF_FRONTEND_URL=http://localhost:3001
