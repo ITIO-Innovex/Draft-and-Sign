@@ -1,6 +1,6 @@
 import express from 'express';
 import {verifyJWT} from '@draftnsign/auth-lib'
-
+import cors from 'cors'
 const app = express();
 app.use(cors({
   origin: "*"
