@@ -1,17 +1,20 @@
-import express from 'express';
-import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
-import cors from 'cors'
-import { connectDB } from './config/db.js';
-import authRoutes from './routes/authRoutes.js';
+const express = require('express');
+const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv');
+const cors = require('cors');
+const { connectDB } = require('./config/db');
+const authRoutes = require('./routes/authRoutes');
 
 dotenv.config();
 
 const app = express();
+
 app.use(cors({
   origin: "*"
 }));
+
 connectDB();
+
 app.use(express.json());
 app.use('/', authRoutes);
 

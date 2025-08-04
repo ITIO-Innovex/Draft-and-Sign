@@ -1,23 +1,15 @@
-FROM node:20-alpine
+FROM node:20
 
 # Set root workdir
 WORKDIR /app
 
-# Copy package files
-COPY package*.json ./
+# Copy the entire monorepo context
+COPY . .
 
-# Copy all package.json files from packages and services
-COPY packages/ ./packages/
-COPY services/ ./services/
-
-# Install dependencies
+# Install all deps including local packages
 RUN npm install
 
 # Set working directory for the service
 WORKDIR /app/services/pdf-service/backend
 
-# Expose port
-EXPOSE 4001
-
-# Start the application
 CMD ["npm", "run", "dev"]
