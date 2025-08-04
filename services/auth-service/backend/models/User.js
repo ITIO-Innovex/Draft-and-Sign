@@ -1,6 +1,5 @@
-import mongoose from 'mongoose';
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 const userSchema = new mongoose.Schema({
   fullname: { type: String, required: true },
@@ -11,7 +10,6 @@ const userSchema = new mongoose.Schema({
   dob: { type: Date, required: false, default: null },
   status: { type: Boolean, default: true },
 }, { timestamps: true });
-
 
 // 🔐 Hash password before saving
 userSchema.pre('save', async function (next) {
@@ -29,4 +27,6 @@ userSchema.methods.isPasswordCorrect = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };
 
-export const User = mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema);
+
+module.exports = { User };
