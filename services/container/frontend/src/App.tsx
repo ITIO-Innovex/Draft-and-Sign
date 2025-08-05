@@ -1,60 +1,72 @@
 import React, { useEffect, useState, Suspense } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link
+} from 'react-router-dom';
 import { loadRemoteRoutes } from './remoteRoutes';
 
-interface RemoteRoute {
-  path: string;
-  element: React.ReactNode;
-  menu?: {
-    main: string;
-    sub: string[];
-  };
+interface RemoteRoutes {
+  elements: Record<string, React.ReactNode>;
+  paths: { name: string; path: string }[];
+  menus: { main: string; items: string[] }[];
 }
 
 export default function App() {
-  const [routes, setRoutes] = useState<RemoteRoute[]>([]);
+  const [remoteRoutes, setRemoteRoutes] = useState<RemoteRoutes>({
+    elements: {},
+    paths: [],
+    menus: []
+  });
 
   useEffect(() => {
-    loadRemoteRoutes().then(setRoutes);
+    loadRemoteRoutes().then(setRemoteRoutes);
   }, []);
 
-  const sidebar: Record<string, Set<string>> = {};
-  routes.forEach(({ menu }) => {
-    const { main, sub } = menu || {};
-    if (!main) return;
-    if (!sidebar[main]) sidebar[main] = new Set();
-    sub?.forEach(s => sidebar[main].add(s));
-  });
+  const { elements, paths, menus } = remoteRoutes;
 
   return (
     <Router>
       <div style={{ display: 'flex' }}>
-        
-        <aside style={{ width: '200px', padding: '1rem', borderRight: '1px solid #ccc' }}>
+        {/* Sidebar */}
+        <aside
+          style={{
+            width: '200px',
+            padding: '1rem',
+            borderRight: '1px solid #ccc'
+          }}
+        >
           <nav>
             <ul>
-              {Object.entries(sidebar).map(([main, subs]) => (
-                <li key={main}>
-                  <strong>{main}</strong>
+              {menus.map((menu) => (
+                <li key={menu.main}>
+                  <strong>{menu.main}</strong>
                   <ul>
-                    {[...subs].map(sub => (
-                      <li key={sub}>
-                        <Link to={`/${main.toLowerCase()}/${sub}`}>{sub}</Link>
-
-                      </li>
-                    ))}
+                    {menu.items.map((item) => {
+                      const pathObj = paths.find(p => p.name === item);
+                      return pathObj ? (
+                        <li key={item}>
+                          <Link to={pathObj.path}>{item}</Link>
+                        </li>
+                      ) : null;
+                    })}
                   </ul>
                 </li>
               ))}
             </ul>
           </nav>
         </aside>
+
+        {/* Main Content */}
         <main style={{ padding: '1rem', flex: 1 }}>
           <Suspense fallback={<div>Loading...</div>}>
             <Routes>
-              {routes.map((route, idx) => (
-                <Route key={idx} path={route.path} element={route.element} />
-              ))}
+              {paths.map(({ name, path }) => {
+                const Element = elements[name];
+                if (!Element) return null;
+                return <Route key={path} path={path} element={Element} />;
+              })}
             </Routes>
           </Suspense>
         </main>

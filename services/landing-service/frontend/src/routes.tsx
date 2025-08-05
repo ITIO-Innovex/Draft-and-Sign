@@ -1,14 +1,19 @@
 import PDFToWordPage from "./pages/PDFToWordPage";
 
-export const routes = [
-  {
-    path: '/landing/login',
-    element: <PDFToWordPage />,
-    menu: {
-      main: 'landing',
-      sub: ['login', 'register'],
-    }
+
+export const routes = {
+  elements: {
+    'PDF-to-Word': <PDFToWordPage />
   },
- 
-  
-];
+
+  paths: [
+    { name: 'PDF-to-Word', path: '/api/document' }
+  ],
+
+  menus: [
+    {
+      main: 'Landing-Services',
+      items: ['PDF-to-Word']
+    }
+  ]
+};

@@ -1,35 +1,21 @@
 import PdfConversion from './pages/PdfConversion';
 import PdfToImage from './pages/PdfToImage';
 
-export const routes = [
-  {
-    path: '/pdf/pdf-conversion',
-    element: <PdfConversion />,
-    menu: {
-      main: 'PDF',
-      sub: ['pdf-conversion', 'pdf-to-image', 'pdf-to-png'],
-    }
+export const routes = {
+  elements: {
+    'PDF-Conversion': <PdfConversion />,
+    'PDF-To-Image': <PdfToImage />,
   },
-  {
-    path: '/pdf/pdf-to-image',
-    element: <PdfToImage />
-  },
-  {
-    path: '/pdf/pdf-to-png',
-    element: <PdfToImage />
-  },
-  {
-    path: '/pdf/pdf-conversion',
-    element: <PdfConversion />,
-    menu: {
-      main: 'PDF Settings'
-    }
-  },
+
+  paths: [
+    { name: 'PDF-Conversion', path: '/api/pdf-conversion' },
+    { name: 'PDF-To-Image', path: '/api/pdf-to-image' },
+  ],
+
+  menus: [
     {
-    path: '/pdf/pdf-conversion',
-    element: <PdfConversion />,
-    menu: {
-      main: 'PDF Profile'
+      main: 'PDF-Services',
+      items: ['PDF-Conversion', 'PDF-To-Image']
     }
-  }
-];
+  ]
+};

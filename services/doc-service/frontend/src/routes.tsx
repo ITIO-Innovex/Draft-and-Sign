@@ -1,24 +1,21 @@
 import Documents from "./pages/document";
 import NewDocuments from "./pages/newDocument";
 
+export const routes = {
+  elements: {
+    'Documents': <Documents />,
+    'New-Document': <NewDocuments />,
+  },
 
+  paths: [
+    { name: 'Documents', path: '/api/document' },
+    { name: 'New-Documents', path: '/api/new-document' },
+  ],
 
-export const routes = [
-  {
-    path: '/doc/documents',
-    element: <Documents />,
-    menu: {
-      main: 'doc',
-      sub: ['documents', 'document-management'],
+  menus: [
+    {
+      main: 'Document-Services',
+      items: ['Documents', 'New-Document']
     }
-  },
-  {
-    path: '/doc/documents',
-    element: <Documents />
-  },
-  {
-    path: '/doc/document-management',
-    element: <NewDocuments />
-  }
-  
-];
+  ]
+};
