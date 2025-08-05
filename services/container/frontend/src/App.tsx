@@ -29,6 +29,7 @@ export default function App() {
   return (
     <Router>
       <div style={{ display: 'flex' }}>
+        
         <aside style={{ width: '200px', padding: '1rem', borderRight: '1px solid #ccc' }}>
           <nav>
             <ul>

@@ -8,7 +8,11 @@ export default defineConfig({
     federation({
       remotes: {
         pdf: 'http://localhost:4173/assets/remoteEntry.js',
-        auth: 'http://localhost:4173/assets/remoteEntry.js'
+        auth: 'http://localhost:4173/assets/remoteEntry.js',
+        landing: 'http://localhost:4173/assets/remoteEntry.js',
+        doc: 'http://localhost:4173/assets/remoteEntry.js',
+        templates: 'http://localhost:4173/assets/remoteEntry.js',
+        api: 'http://localhost:4173/assets/remoteEntry.js',
       },
       shared: ['react', 'react-dom']
     })
