@@ -12,7 +12,7 @@ export async function loadRemoteRoutes(): Promise<RemoteRoutes> {
   };
 
   try {
-    const auth = await import('templates/routes');
+    const auth = await import('landing/routes');
     const authRoutes = auth.default?.routes || auth.default;
 
     if (

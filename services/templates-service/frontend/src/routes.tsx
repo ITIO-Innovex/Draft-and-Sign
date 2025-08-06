@@ -1,5 +1,5 @@
 import DashboardTemplate from "./pages/Dashboard";
-import TemplateDesign from "./pages/templateDesign";
+import TemplateDesign from "./pages/templateDesign"; 
 
 export const routes = {
   elements: {

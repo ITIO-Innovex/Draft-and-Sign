@@ -1,19 +1,21 @@
-import PDFToWordPage from "./pages/PDFToWordPage";
-
+import LandingPage from "./pages/LandingPage";
+import About from "./pages/about";
 
 export const routes = {
   elements: {
-    'PDF-to-Word': <PDFToWordPage />
+    'Landing-Page': <LandingPage />,
+    'About-Page': <About />,
   },
 
   paths: [
-    { name: 'PDF-to-Word', path: '/api/document' }
+    { name: 'Landing-Page', path: '/' },
+    { name: 'About-Page', path: '/about' },
   ],
 
   menus: [
     {
       main: 'Landing-Services',
-      items: ['PDF-to-Word']
+      items: ['Landing-Page', 'About-Page']
     }
   ]
 };
