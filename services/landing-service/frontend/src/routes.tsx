@@ -8,8 +8,8 @@ export const routes = {
   },
 
   paths: [
-    { name: 'Landing-Page', path: '/' },
-    { name: 'About-Page', path: '/about' },
+    { name: 'Landing-Page', path: '/', layout: 'landing' },
+    { name: 'About-Page', path: '/about', layout: 'landing' },
   ],
 
   menus: [

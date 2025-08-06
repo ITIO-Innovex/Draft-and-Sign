@@ -10,8 +10,8 @@ export default function App() {
         <h1>Landing Service Frontend</h1>
         <nav>
           <ul>
-            <li><Link to="/">PDF Conversion</Link></li>
-            <li><Link to="/about">PDF to Image</Link></li>
+            <li><Link to="/">Landing Page</Link></li>
+            <li><Link to="/about">About</Link></li>
           </ul>
         </nav>
         <Routes>

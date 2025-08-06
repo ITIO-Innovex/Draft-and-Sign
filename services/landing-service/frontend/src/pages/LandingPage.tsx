@@ -1,4 +1,4 @@
 
 export default function LandingPage() {
-  return <div>Landing Page</div>;
+  return <div className="min-h-screen bg-white">Landing Page</div>;
 }

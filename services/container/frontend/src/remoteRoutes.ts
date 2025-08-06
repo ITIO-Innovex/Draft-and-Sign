@@ -1,6 +1,6 @@
 export interface RemoteRoutes {
   elements: Record<string, React.ReactNode>;
-  paths: { name: string; path: string }[];
+  paths: { name: string; path: string; layout: string }[];
   menus: { main: string; items: string[] }[];
 }
 
