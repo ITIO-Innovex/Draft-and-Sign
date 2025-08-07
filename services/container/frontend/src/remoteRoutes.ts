@@ -1,5 +1,6 @@
+
 export interface RemoteRoutes {
-  elements: Record<string, React.ReactNode>;
+  elements: Record<string, React.ComponentType>;
   paths: { name: string; path: string; layout: string }[];
   menus: { main: string; items: string[] }[];
 }
@@ -12,7 +13,7 @@ export async function loadRemoteRoutes(): Promise<RemoteRoutes> {
   };
 
   try {
-    const auth = await import('landing/routes');
+    const auth = await import('auth/routes');
     const authRoutes = auth.default?.routes || auth.default;
 
     if (

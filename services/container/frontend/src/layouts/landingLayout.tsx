@@ -4,9 +4,9 @@ import Footer from '../components/Footer';
 
 export function LandingLayout({ children }: React.PropsWithChildren<{}>) {
   return (
-    <div>
+    <div className="min-h-screen bg-white">
       <Header/>
-        <main>{children}</main>
+       {children}
       <Footer/>
     </div>
   );

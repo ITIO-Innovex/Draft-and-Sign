@@ -12,11 +12,17 @@ export default defineConfig({
         './App': './src/App.tsx',
         './routes': './src/routes.tsx'
       },
-      shared: ['react', 'react-dom']
+      // webpack.config.js
+      shared: {
+        react: { singleton: true, requiredVersion: '^18.0.0' },
+        'react-dom': { singleton: true, requiredVersion: '^18.0.0' },
+        'react-router-dom': { singleton: true, requiredVersion: '^6.0.0' }
+      }
     })
   ],
   build: {
-    target: 'esnext'
+    target: 'esnext',
+    cssCodeSplit: false // 
   },
   server: {
     port: 3000
